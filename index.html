@@ -2,22 +2,28 @@
 layout: default
 ---
 
+{% include paypal.html %}
 <div class="home">
+{% assign topics = site.topics | split: "|" %}
+{% for topic in topics %}
+<h1 class="page-heading">{{ topic | capitalize}}</h1>
 
-  <h1 class="page-heading">Posts</h1>
+  <div id="three-columns" class="grid-container">
+    <ul class="rig columns-4">
+    {% loop_directory directory:thumbnails iterator:thumbnail filter:*.jpg sort:descending %}
+        {% assign tag = topic | truncate: 5,'' %}
+        {% if thumbnail contains tag %}
+        <li>
+        <a href="{{ "#" | prepend: site.baseurl }}" onclick="loadPhoto('{{ thumbnail }}','thumbnails/{{ thumbnail }}.jpg')"><div>
+        <img src="thumbnails/{{ thumbnail }}.jpg"/>
+        {% assign title = thumbnail | split: "_" %}
+        </div></a>
+        <h3>{{ title[1] | capitalize}}</h3>
+        </li>
+        {% endif %}
+    {% endloop_directory %}
+    </ul>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
+{% endfor %}
+  <!-- p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p !-->
 </div>
