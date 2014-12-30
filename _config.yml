@@ -9,10 +9,5 @@ url: "http://craneophoto.com" # the base hostname & protocol for your site
 github_username:  craneo007
 flickr_username:  craneo007
 
-baseurl: "/craneophoto.com" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
-twitter_username: jekyllrb
-github_username:  jekyll
-
 # Build settings
 markdown: kramdown
